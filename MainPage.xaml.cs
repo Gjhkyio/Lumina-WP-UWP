@@ -17,7 +17,7 @@ namespace Lumina
     public sealed partial class MainPage : Page
     {
         private static readonly HttpClient client = new HttpClient();
-        private const string API_KEY = "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";
+        private const string API_KEY = "";
 
         private ObservableCollection<AIMessage> chatMessages = new ObservableCollection<AIMessage>();
 
