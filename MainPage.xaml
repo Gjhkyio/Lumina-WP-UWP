@@ -1,0 +1,78 @@
+﻿<Page
+    x:Class="Lumina.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lumina"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0.333,0,-0.333">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Top bar -->
+            <RowDefinition Height="*"/>
+            <!-- Chat area -->
+            <RowDefinition Height="Auto"/>
+            <!-- Input area -->
+        </Grid.RowDefinitions>
+
+        <!-- Top bar (Fixed) -->
+        <Grid Grid.Row="0" Background="#333" VerticalAlignment="Top" Height="78" Grid.RowSpan="2" Margin="0,-27,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Lumina logo -->
+            <Image Source="ms-appx:///Assets/luminaa.png" Height="137"
+                   VerticalAlignment="Center"
+                   Grid.Column="0" Grid.ColumnSpan="2"
+                   Margin="-25,-16,255,-43"/>
+
+            <!-- L2Labs logo -->
+        </Grid>
+
+        <!-- Chat display (Scrollable) -->
+        <ScrollViewer x:Name="ChatScrollViewer" Grid.Row="1" Margin="10,51,10,9.5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl x:Name="ChatItems" VerticalAlignment="Top">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,10">
+                            <Border Background="{Binding BackgroundColor}" Margin="25" MaxWidth="700" HorizontalAlignment="{Binding Align}">
+                                <TextBlock Text="{Binding Content}" FontSize="18" Foreground="White" TextWrapping="Wrap" Padding="10"/>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- User input area -->
+        <Grid Grid.Row="2" Margin="10,0" VerticalAlignment="Bottom" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="InputTextBox" MinWidth="200" Height="39" PlaceholderText="Ask anything..." Margin="0,0,5,0" Grid.Column="0"/>
+            <Button x:Name="SubmitButton" Content="Send" Click="SubmitButton_Click" Width="100" Height="39" Margin="0.167,-9,0,8" Background="Blue" Foreground="White" BorderBrush="Transparent" Grid.Column="1"/>
+        </Grid>
+
+        <!-- MediaElement for sound (hidden) -->
+        <MediaElement x:Name="ReplySound" AutoPlay="False" Visibility="Collapsed"/>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Setting" Label="Settings" Click="SettingsButton_Click"/>
+            <AppBarButton Label="History" Click="HistoryButton_Click">
+                <AppBarButton.Icon>
+                    <SymbolIcon Symbol="Calendar" />
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+</Page>

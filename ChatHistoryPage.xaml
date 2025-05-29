@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="Lumina.ChatHistoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Model selector -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8">
+            <TextBlock Text="Model:" VerticalAlignment="Center" Foreground="White"/>
+            <ComboBox x:Name="ModelComboBox"
+                Width="250"
+                Margin="8,0,0,0"
+                SelectionChanged="ModelComboBox_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Chat history -->
+        <ListBox x:Name="ChatListBox"
+             Grid.Row="1"
+             Background="Black"
+             Margin="0,0,0,8">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,4">
+                        <TextBlock Text="{Binding Role}"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       Margin="0,0,0,2"/>
+                        <TextBlock Text="{Binding Content}"
+                       TextWrapping="WrapWholeWords"
+                       Foreground="White"
+                       Margin="0,0,0,2"/>
+                        <TextBlock Text="{Binding Timestamp}"
+                       FontStyle="Italic"
+                       FontSize="12"
+                       Foreground="White"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Bottom row: Back (left) and Delete (right) -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="BackButton"
+              Grid.Column="0"
+              Content="Back"
+              Click="BackButton_Click"/>
+
+            <Button x:Name="DeleteHistoryButton"
+              Grid.Column="2"
+              Content="Delete History"
+              Click="DeleteHistoryButton_Click"
+              HorizontalAlignment="Right"/>
+        </Grid>
+    </Grid>
+</Page>
