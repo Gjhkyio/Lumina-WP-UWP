@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{11791B28-0D70-421B-B23E-E995D6C8282E}") = "Lumina", "Lumina.csproj", "{76F1466A-8B6D-4E39-A767-685A06062A39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
