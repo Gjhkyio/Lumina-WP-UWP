@@ -34,12 +34,16 @@ steps:
                   /p:AppxBundle=Always
                   /p:UapAppxPackageBuildMode=StoreUpload'
 
-#- task: CopyFiles@2
-#  displayName: 'Copy Files to: $(build.artifactStagingDirectory)'
-#  inputs:
-#    SourceFolder: '$(appxPackageDir)'
-#    Contents: '**'
-#    TargetFolder: '$(build.artifactStagingDirectory)'
+- script: |
+    mkdir -p "$(appxPackageDir)"
+  displayName: 'creating source directory..'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactStagingDirectory)'
+  inputs:
+    SourceFolder: '$(appxPackageDir)'
+    Contents: '**'
+    TargetFolder: '$(build.artifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
