@@ -42,7 +42,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactStagingDirectory)'
   inputs:
-    SourceFolder: '$(appxPackageDir)'
+    SourceFolder: '$(releaseDir)'
     Contents: '**'
     TargetFolder: '$(releaseDir)'
 
