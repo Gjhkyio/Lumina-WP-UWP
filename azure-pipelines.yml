@@ -13,8 +13,9 @@ variables:
   solution: '**/Lumina.sln'
   buildPlatform: 'x86;x64;ARM'
   buildConfiguration: 'Release'
-  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages\\'
-  buildDir: '$(build.artifactStagingDirectory)\build\\'
+  appxPackageDir: '$(build.artifactStagingDirectory)\AppxPackages'
+  buildDir: '$(build.artifactStagingDirectory)\build'
+  releaseDir: '$(build.artifactStagingDirectory)\ReleasePackages'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -30,22 +31,22 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)"
                   /p:AppxPackageDir="$(appxPackageDir)"
-                  /p:OutputPath="$(buildDir)"
+                  /p:OutputPath="$(releaseDir)"
                   /p:AppxBundle=Always
                   /p:UapAppxPackageBuildMode=StoreUpload'
 
 - script: |
-    mkdir -p "$(appxPackageDir)"
-  displayName: 'creating source directory..'
+    mkdir "$(releaseDir)"
+  displayName: 'creating releases directory..'
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactStagingDirectory)'
   inputs:
     SourceFolder: '$(appxPackageDir)'
     Contents: '**'
-    TargetFolder: '$(build.artifactStagingDirectory)'
+    TargetFolder: '$(releaseDir)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(build.artifactStagingDirectory)'
+    PathtoPublish: '$(releaseDir)'
